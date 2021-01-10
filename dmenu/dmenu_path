@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cachedir=${TMP_HOME:-/tmp}
+cachedir=${TMPDIR:-/tmp}
 cache="$cachedir/dmenu_run"
 
 [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
