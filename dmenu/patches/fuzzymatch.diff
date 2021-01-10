@@ -4,22 +4,12 @@ Date: Sun, 10 Jan 2021 14:19:28 -0500
 Subject: [PATCH] patch for fuzzy matching
 
 ---
- dmenu/README.md |  1 +
  dmenu/config.h  |  1 +
  dmenu/config.mk |  2 +-
  dmenu/dmenu.1   |  5 ++-
  dmenu/dmenu.c   | 92 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 5 files changed, 98 insertions(+), 3 deletions(-)
+ 4 files changed, 97 insertions(+), 3 deletions(-)
 
-diff --git a/dmenu/README.md b/dmenu/README.md
-index ba5befd..83c71b4 100644
---- a/dmenu/README.md
-+++ b/dmenu/README.md
-@@ -34,3 +34,4 @@ This build supports the following:
- 
- - `-bw` to control dmenu window border width
- - `-c` to center dmenu window to middle of screen
-+- `-F` to enable fuzzy matching in dmenu
 diff --git a/dmenu/config.h b/dmenu/config.h
 index fbb15c7..d640c61 100644
 --- a/dmenu/config.h
@@ -37,12 +27,12 @@ index 05d5a3e..0c84121 100644
 --- a/dmenu/config.mk
 +++ b/dmenu/config.mk
 @@ -20,7 +20,7 @@ FREETYPEINC = /usr/include/freetype2
- 
+
  # includes and libs
  INCS = -I$(X11INC) -I$(FREETYPEINC)
 -LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS)
 +LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS) -lm
- 
+
  # flags
  CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\" $(XINERAMAFLAGS)
 diff --git a/dmenu/dmenu.1 b/dmenu/dmenu.1
@@ -86,12 +76,12 @@ index d4e5470..b0aa8e1 100644
  	int out;
 +	double distance;
  };
- 
+
  static char text[BUFSIZ] = "";
 @@ -219,6 +221,87 @@ grabkeyboard(void)
  	die("cannot grab keyboard");
  }
- 
+
 +int
 +compare_distance(const void *a, const void *b)
 +{
@@ -179,7 +169,7 @@ index d4e5470..b0aa8e1 100644
 @@ -230,6 +313,11 @@ match(void)
  	size_t len, textsize;
  	struct item *item, *lprefix, *lsubstr, *prefixend, *substrend;
- 
+
 +	if (fuzzy) {
 +		fuzzymatch();
 +		return;
@@ -206,6 +196,6 @@ index d4e5470..b0aa8e1 100644
  		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
  			fstrncmp = strncasecmp;
  			fstrstr = cistrstr;
--- 
+--
 2.30.0
 

@@ -4,24 +4,9 @@ Date: Sun, 10 Jan 2021 15:45:35 -0500
 Subject: [PATCH] patch for Xresources
 
 ---
- dmenu/README.md |  6 ++++
  dmenu/dmenu.c   | 74 ++++++++++++++++++++++++++++++++++++++++++++-----
- 2 files changed, 73 insertions(+), 7 deletions(-)
+ 1 files changed, 67 insertions(+), 7 deletions(-)
 
-diff --git a/dmenu/README.md b/dmenu/README.md
-index 784b34b..a02ba67 100644
---- a/dmenu/README.md
-+++ b/dmenu/README.md
-@@ -36,3 +36,9 @@ This build supports the following:
- - `-c` to center dmenu window to middle of screen
- - `-F` to enable fuzzy matching in dmenu
- - `-P` to ignore data from `stdin` & replace keyboard input with `*`'s
-+- Xresources integration:
-+    - dmenu.font for font or font set
-+    - dmenu.background for normal background color
-+    - dmenu.foreground for normal foreground color
-+    - dmenu.selbackground for selected background color
-+    - dmenu.selforeground for selected foreground color
 diff --git a/dmenu/dmenu.c b/dmenu/dmenu.c
 index e5a2810..976942f 100644
 --- a/dmenu/dmenu.c
@@ -31,24 +16,24 @@ index e5a2810..976942f 100644
  #endif
  #include <X11/Xft/Xft.h>
 +#include <X11/Xresource.h>
- 
+
  #include "drw.h"
  #include "util.h"
 @@ -55,6 +56,10 @@ static XIC xic;
  static Drw *drw;
  static Clr *scheme[SchemeLast];
- 
+
 +/* Temporary arrays to allow overriding xresources values */
 +static char *colortemp[4];
 +static char *tempfonts;
 +
  #include "config.h"
- 
+
  static int (*fstrncmp)(const char *, const char *, size_t) = strncmp;
 @@ -655,6 +660,42 @@ readstdin(void)
  	lines = MIN(lines, i);
  }
- 
+
 +void
 +readxresources(void)
 +{
@@ -98,7 +83,7 @@ index e5a2810..976942f 100644
 +		for (i = 0; i < 2; ++i)
 +			free(colors[j][i]);
 +	}
- 
+
  	clip = XInternAtom(dpy, "CLIPBOARD",   False);
  	utf8 = XInternAtom(dpy, "UTF8_STRING", False);
 @@ -853,15 +898,15 @@ main(int argc, char *argv[])
@@ -145,8 +130,8 @@ index e5a2810..976942f 100644
 +
 +	free(fonts[0]);
  	lrpad = drw->fonts->h;
- 
+
  #ifdef __OpenBSD__
--- 
+--
 2.30.0
 

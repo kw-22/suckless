@@ -35,7 +35,7 @@ This build supports the following:
 - `-bw` to control dmenu window border width
 - `-c` to center dmenu window to middle of screen
 - `-F` to enable fuzzy matching in dmenu
-- `-P` to ignore data from `stdin` & replace keyboard input with `*`'s
+- `-P` to ignore data from `stdin` &amp; replace keyboard input with `*`'s
 - Xresources integration:
     - dmenu.font for font or font set
     - dmenu.background for normal background color
