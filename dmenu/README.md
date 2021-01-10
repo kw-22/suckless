@@ -29,3 +29,8 @@ Running dmenu
 -------------
 See the man page for details.
 ```
+
+This build supports the following:
+
+- `-bw` to control dmenu window border width
+- `-c` to center dmenu window to middle of screen
