@@ -36,3 +36,9 @@ This build supports the following:
 - `-c` to center dmenu window to middle of screen
 - `-F` to enable fuzzy matching in dmenu
 - `-P` to ignore data from `stdin` & replace keyboard input with `*`'s
+- Xresources integration:
+    - dmenu.font for font or font set
+    - dmenu.background for normal background color
+    - dmenu.foreground for normal foreground color
+    - dmenu.selbackground for selected background color
+    - dmenu.selforeground for selected foreground color
