@@ -213,11 +213,11 @@ index 3a7cda7..607297f 100755
 +++ b/dmenu/dmenu_path
 @@ -1,6 +1,6 @@
  #!/bin/sh
- 
+
 -cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-+cachedir=/tmp
++cachedir=${TMP_HOME:-/tmp}
  cache="$cachedir/dmenu_run"
- 
+
  [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
 diff --git a/dmenu/drw.c b/dmenu/drw.c
 index 4cdbcbe..9343c5a 100644
@@ -235,9 +235,9 @@ index 4cdbcbe..9343c5a 100644
  		return NULL;
  	}
 +    */
- 
+
  	font = ecalloc(1, sizeof(Fnt));
  	font->xfont = xfont;
--- 
+--
 2.30.0
 
