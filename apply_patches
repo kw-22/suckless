@@ -1,0 +1,12 @@
+#!/bin/sh
+
+dots="$HOME/Downloads/dotfiles"
+
+for d in */; do
+    d=${d%\/}
+    if [ -f "$dots/.config/suckless/$d/patches" ]; then
+        while IFS='' read -r line || [ -n "$line" ]; do
+            git apply "$d/patches/$line.diff"
+        done < "$dots/.config/suckless/$d/patches"
+    fi
+done
