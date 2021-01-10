@@ -35,3 +35,4 @@ This build supports the following:
 - `-bw` to control dmenu window border width
 - `-c` to center dmenu window to middle of screen
 - `-F` to enable fuzzy matching in dmenu
+- `-P` to ignore data from `stdin` & replace keyboard input with `*`'s
