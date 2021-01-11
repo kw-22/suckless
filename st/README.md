@@ -41,4 +41,5 @@ Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
 
 This build supports the following:
 
-- background transparency
+- terminal background transparency
+- arbitrary terminal resizing
