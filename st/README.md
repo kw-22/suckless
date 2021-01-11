@@ -44,3 +44,4 @@ This build supports the following:
 - terminal background transparency
 - arbitrary terminal resizing
 - multiple fonts
+- inversion of current terminal color scheme
