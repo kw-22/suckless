@@ -101,6 +101,27 @@ double alpha = 0.6;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
+	"#282828", /* black   */
+	"#cc241d", /* red     */
+	"#98971a", /* green   */
+	"#d79921", /* yellow  */
+	"#458588", /* blue    */
+	"#b16286", /* magenta */
+	"#689d6a", /* cyan    */
+	"#a89984", /* white   */
+
+	/* 8 bright colors */
+	"#928374", /* black   */
+	"#fb4934", /* red     */
+	"#b8bb26", /* green   */
+	"#fabd2f", /* yellow  */
+	"#83a598", /* blue    */
+	"#d3869b", /* magenta */
+	"#8ec07c", /* cyan    */
+	"#ebdbb2", /* white   */
+
+	/* 8 normal colors */
+	/*
 	"black",
 	"red3",
 	"green3",
@@ -109,8 +130,10 @@ static const char *colorname[] = {
 	"magenta3",
 	"cyan3",
 	"gray90",
+	*/
 
 	/* 8 bright colors */
+	/*
 	"gray50",
 	"red",
 	"green",
@@ -119,6 +142,7 @@ static const char *colorname[] = {
 	"magenta",
 	"cyan",
 	"white",
+	*/
 
 	[255] = 0,
 
