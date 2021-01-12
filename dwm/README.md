@@ -57,3 +57,4 @@ and (re)compiling the source code.
 This build supports the following:
 
 - true fullscreen support for windows
+- transparent borders issue fixed
