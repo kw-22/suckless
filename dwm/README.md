@@ -59,3 +59,4 @@ This build supports the following:
 - true fullscreen support for windows
 - transparent borders issue fixed
 - centered master view layout
+- stack area on left &amp; master area on right in tiled layout
