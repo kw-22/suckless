@@ -1,0 +1,63 @@
+From 066be3f7edae029f3154eb78e64420551af6f08d Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Tue, 12 Jan 2021 09:48:00 -0500
+Subject: [PATCH] color changes
+
+---
+ st/config.h | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/st/config.h b/st/config.h
+index 4fe6ad6..0a188ca 100644
+--- a/st/config.h
++++ b/st/config.h
+@@ -101,6 +101,27 @@ double alpha = 0.6;
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+ 	/* 8 normal colors */
++	"#282828", /* black   */
++	"#cc241d", /* red     */
++	"#98971a", /* green   */
++	"#d79921", /* yellow  */
++	"#458588", /* blue    */
++	"#b16286", /* magenta */
++	"#689d6a", /* cyan    */
++	"#a89984", /* white   */
++
++	/* 8 bright colors */
++	"#928374", /* black   */
++	"#fb4934", /* red     */
++	"#b8bb26", /* green   */
++	"#fabd2f", /* yellow  */
++	"#83a598", /* blue    */
++	"#d3869b", /* magenta */
++	"#8ec07c", /* cyan    */
++	"#ebdbb2", /* white   */
++
++	/* 8 normal colors */
++	/*
+ 	"black",
+ 	"red3",
+ 	"green3",
+@@ -109,8 +130,10 @@ static const char *colorname[] = {
+ 	"magenta3",
+ 	"cyan3",
+ 	"gray90",
++	*/
+ 
+ 	/* 8 bright colors */
++	/*
+ 	"gray50",
+ 	"red",
+ 	"green",
+@@ -119,6 +142,7 @@ static const char *colorname[] = {
+ 	"magenta",
+ 	"cyan",
+ 	"white",
++	*/
+ 
+ 	[255] = 0,
+ 
+-- 
+2.30.0
+
