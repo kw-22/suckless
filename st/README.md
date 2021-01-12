@@ -46,3 +46,4 @@ This build supports the following:
 - multiple fonts
 - inversion of current terminal color scheme
 - terminal scrolling using `Shift+Page Up` &amp; `Shift+Page Down` or the mouse
+- ligatures
