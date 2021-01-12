@@ -1,0 +1,25 @@
+From 99f8d4c00317c36d25f17a61901b31c9b1952c95 Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Tue, 12 Jan 2021 11:44:49 -0500
+Subject: [PATCH] patch for borders
+
+---
+ dwm/drw.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/dwm/drw.c b/dwm/drw.c
+index 9343c5a..55f08f7 100644
+--- a/dwm/drw.c
++++ b/dwm/drw.c
+@@ -206,6 +206,8 @@ drw_clr_create(Drw *drw, Clr *dest, const char *clrname)
+ 	                       DefaultColormap(drw->dpy, drw->screen),
+ 	                       clrname, dest))
+ 		die("error, cannot allocate color '%s'", clrname);
++
++	dest->pixel |= 0xff << 24;
+ }
+ 
+ /* Wrapper to create color schemes. The caller has to call free(3) on the
+-- 
+2.30.0
+
