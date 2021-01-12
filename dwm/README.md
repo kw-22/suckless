@@ -58,3 +58,4 @@ This build supports the following:
 
 - true fullscreen support for windows
 - transparent borders issue fixed
+- centered master view layout
