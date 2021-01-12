@@ -1,0 +1,188 @@
+From 72bcd76ca020e423e1d2fd00654e9c77bfede06f Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Tue, 12 Jan 2021 14:07:23 -0500
+Subject: [PATCH] patch for centered master
+
+---
+ dwm/config.h |   4 ++
+ dwm/dwm.1    |  12 ++++--
+ dwm/dwm.c    | 105 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 118 insertions(+), 3 deletions(-)
+
+diff --git a/dwm/config.h b/dwm/config.h
+index c622fec..d69d245 100644
+--- a/dwm/config.h
++++ b/dwm/config.h
+@@ -41,6 +41,8 @@ static const Layout layouts[] = {
+ 	{ "[]=",      tile },    /* first entry is default */
+ 	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
++	{ "|M|",      centeredmaster },
++	{ ">M>",      centeredfloatingmaster }
+ };
+ 
+ /* key definitions */
+@@ -76,6 +78,8 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_F1,     setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_F2,     setlayout,      {.v = &layouts[1]} },
+ 	// { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_F3,     setlayout,      {.v = &layouts[3]} },
++	{ MODKEY|ShiftMask,             XK_F3,     setlayout,      {.v = &layouts[4]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
+diff --git a/dwm/dwm.1 b/dwm/dwm.1
+index dccb602..0170fb8 100644
+--- a/dwm/dwm.1
++++ b/dwm/dwm.1
+@@ -80,15 +80,21 @@ Send focused window to next screen, if any.
+ .B Mod1+b
+ Toggles bar on and off.
+ .TP
+-.B Mod1+t
++.B Mod1+F1
+ Sets tiled layout.
+ .TP
+-.B Mod1+f
++.B Mod1+F2
+ Sets floating layout.
+ .TP
+-.B Mod1+m
++.B Mod1+f
+ Sets monocle layout.
+ .TP
++.B Mod1+F3
++Sets centered master layout.
++.TP
++.B Mod1+Shift+F3
++Sets centered floating master layout.
++.TP
+ .B Mod1+space
+ Toggles between current and previous layout.
+ .TP
+diff --git a/dwm/dwm.c b/dwm/dwm.c
+index 806c5b0..ea2a826 100644
+--- a/dwm/dwm.c
++++ b/dwm/dwm.c
+@@ -149,6 +149,8 @@ static void arrangemon(Monitor *m);
+ static void attach(Client *c);
+ static void attachstack(Client *c);
+ static void buttonpress(XEvent *e);
++static void centeredmaster(Monitor *m);
++static void centeredfloatingmaster(Monitor *m);
+ static void checkotherwm(void);
+ static void cleanup(void);
+ static void cleanupmon(Monitor *mon);
+@@ -457,6 +459,109 @@ buttonpress(XEvent *e)
+ 			buttons[i].func(click == ClkTagBar && buttons[i].arg.i == 0 ? &arg : &buttons[i].arg);
+ }
+ 
++void
++centeredmaster(Monitor *m)
++{
++	unsigned int i, n, h, mw, mx, my, oty, ety, tw;
++	Client *c;
++
++	/* count number of clients in the selected monitor */
++	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++	if (n == 0)
++		return;
++
++	/* initialize areas */
++	mw = m->ww;
++	mx = 0;
++	my = 0;
++	tw = mw;
++
++	if (n > m->nmaster) {
++		/* go mfact box in the center if more than nmaster clients */
++		mw = m->nmaster ? m->ww * m->mfact : 0;
++		tw = m->ww - mw;
++
++		if (n - m->nmaster > 1) {
++			/* only one client */
++			mx = (m->ww - mw) / 2;
++			tw = (m->ww - mw) / 2;
++		}
++	}
++
++	oty = 0;
++	ety = 0;
++	for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++	if (i < m->nmaster) {
++		/* nmaster clients are stacked vertically, in the center
++		 * of the screen */
++		h = (m->wh - my) / (MIN(n, m->nmaster) - i);
++		resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
++		       h - (2*c->bw), 0);
++		my += HEIGHT(c);
++	} else {
++		/* stack clients are stacked vertically */
++		if ((i - m->nmaster) % 2 ) {
++			h = (m->wh - ety) / ( (1 + n - i) / 2);
++			resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
++			       h - (2*c->bw), 0);
++			ety += HEIGHT(c);
++		} else {
++			h = (m->wh - oty) / ((1 + n - i) / 2);
++			resize(c, m->wx + mx + mw, m->wy + oty,
++			       tw - (2*c->bw), h - (2*c->bw), 0);
++			oty += HEIGHT(c);
++		}
++	}
++}
++
++void
++centeredfloatingmaster(Monitor *m)
++{
++	unsigned int i, n, w, mh, mw, mx, mxo, my, myo, tx;
++	Client *c;
++
++	/* count number of clients in the selected monitor */
++	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++	if (n == 0)
++		return;
++
++	/* initialize nmaster area */
++	if (n > m->nmaster) {
++		/* go mfact box in the center if more than nmaster clients */
++		if (m->ww > m->wh) {
++			mw = m->nmaster ? m->ww * m->mfact : 0;
++			mh = m->nmaster ? m->wh * 0.9 : 0;
++		} else {
++			mh = m->nmaster ? m->wh * m->mfact : 0;
++			mw = m->nmaster ? m->ww * 0.9 : 0;
++		}
++		mx = mxo = (m->ww - mw) / 2;
++		my = myo = (m->wh - mh) / 2;
++	} else {
++		/* go fullscreen if all clients are in the master area */
++		mh = m->wh;
++		mw = m->ww;
++		mx = mxo = 0;
++		my = myo = 0;
++	}
++
++	for (i = tx = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++	if (i < m->nmaster) {
++		/* nmaster clients are stacked horizontally, in the center
++		 * of the screen */
++		w = (mw + mxo - mx) / (MIN(n, m->nmaster) - i);
++		resize(c, m->wx + mx, m->wy + my, w - (2*c->bw),
++		       mh - (2*c->bw), 0);
++		mx += WIDTH(c);
++	} else {
++		/* stack clients are stacked horizontally */
++		w = (m->ww - tx) / (n - i);
++		resize(c, m->wx + tx, m->wy, w - (2*c->bw),
++		       m->wh - (2*c->bw), 0);
++		tx += WIDTH(c);
++	}
++}
++
+ void
+ checkotherwm(void)
+ {
+-- 
+2.30.0
+
