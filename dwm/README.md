@@ -63,3 +63,9 @@ This build supports the following:
 - colors &amp; rectangle drawing in status bar
 - clickable status bar using dwmblocks
 - sticky windows
+- Xresources integration:
+    - dwm.normbordercolor
+    - dwm.normfgcolor
+    - dwm.selbgcolor
+    - dwm.selbordercolor
+    - dwm.selfgcolor
