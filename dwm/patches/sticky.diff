@@ -1,0 +1,86 @@
+From bd4d6a856da5986989167b90400258d6fbeaa64c Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Tue, 12 Jan 2021 20:09:58 -0500
+Subject: [PATCH] patch for stick windows
+
+---
+ dwm/config.h |  1 +
+ dwm/dwm.1    |  3 +++
+ dwm/dwm.c    | 14 ++++++++++++--
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/dwm/config.h b/dwm/config.h
+index a06c2c0..d439c4c 100644
+--- a/dwm/config.h
++++ b/dwm/config.h
+@@ -83,6 +83,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
++	{ MODKEY,                       XK_s,      togglesticky,   {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+ 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+ 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+diff --git a/dwm/dwm.1 b/dwm/dwm.1
+index 5ea0df2..b80dfdb 100644
+--- a/dwm/dwm.1
++++ b/dwm/dwm.1
+@@ -98,6 +98,9 @@ Sets centered floating master layout.
+ .B Mod1+space
+ Toggles between current and previous layout.
+ .TP
++.B Mod1+s
++Toggles window's stickiness.
++.TP
+ .B Mod1+j
+ Focus next window.
+ .TP
+diff --git a/dwm/dwm.c b/dwm/dwm.c
+index 3ce6245..2c4c4a7 100644
+--- a/dwm/dwm.c
++++ b/dwm/dwm.c
+@@ -49,7 +49,7 @@
+ #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
+ #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
+                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
++#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]) || C->issticky)
+ #define LENGTH(X)               (sizeof X / sizeof X[0])
+ #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
+ #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
+@@ -92,7 +92,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, issticky;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -219,6 +219,7 @@ static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
+ static void togglefullscr(const Arg *arg);
++static void togglesticky(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+ static void unfocus(Client *c, int setfocus);
+@@ -2008,6 +2009,15 @@ togglefullscr(const Arg *arg)
+ 		setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+ }
+ 
++void
++togglesticky(const Arg *arg)
++{
++	if (!selmon->sel)
++		return;
++	selmon->sel->issticky = !selmon->sel->issticky;
++	arrange(selmon);
++}
++
+ void
+ toggletag(const Arg *arg)
+ {
+-- 
+2.30.0
+
