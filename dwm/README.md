@@ -61,3 +61,4 @@ This build supports the following:
 - centered master view layout
 - stack area on the left &amp; master area on the right in tiled layout
 - colors &amp; rectangle drawing in status bar
+- clickable status bar using dwmblocks
