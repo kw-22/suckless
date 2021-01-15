@@ -1,0 +1,25 @@
+From 4f610a5e641c5cc9d214b8615530275b91eb5cdb Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Fri, 15 Jan 2021 14:17:12 -0500
+Subject: [PATCH] added dwmblocks
+
+---
+ dwm/config.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/dwm/config.h b/dwm/config.h
+index cfa993a..2d4443b 100644
+--- a/dwm/config.h
++++ b/dwm/config.h
+@@ -20,7 +20,7 @@ static char *colors[][3] = {
+ };
+ 
+ /* tagging */
+-static const char *tags[] = { "⌨", "🗺", "3", "4", "🎶" };
++static const char *tags[] = { "1", "2", "3", "4", "5" };
+ 
+ static const Rule rules[] = {
+ 	/* xprop(1):
+-- 
+2.30.0
+
