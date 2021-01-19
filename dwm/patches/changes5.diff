@@ -1,0 +1,25 @@
+From 9765ed5e9510661d9d6e96afaa86df041b0efff2 Mon Sep 17 00:00:00 2001
+From: Kevin <kw22@princeton.edu>
+Date: Tue, 19 Jan 2021 11:28:29 -0500
+Subject: [PATCH] personal changes made
+
+---
+ dwm/config.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/dwm/config.h b/dwm/config.h
+index 2d4443b..561762d 100644
+--- a/dwm/config.h
++++ b/dwm/config.h
+@@ -33,6 +33,8 @@ static const Rule rules[] = {
+ 	{ "firefox",  "Devtools", NULL,       1 << 1,       1,           -1 },
+ 	{ "Chromium", NULL,       NULL,       1 << 1,       0,           -1 },
+ 	{ "Code",     NULL,       NULL,       1 << 2,       0,           -1 },
++	{ NULL,       "pulsemixer", NULL,     0,            1,           -1 },
++	{ NULL,       "calc",     NULL,       0,            1,           -1 },
+ };
+ 
+ /* layout(s) */
+-- 
+2.30.0
+
