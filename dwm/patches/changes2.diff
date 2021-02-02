@@ -14,7 +14,7 @@ index d90bd51..cfa993a 100644
 +++ b/dwm/config.h
 @@ -1,12 +1,12 @@
  /* See LICENSE file for copyright and license details. */
- 
+
  /* appearance */
 -static const unsigned int borderpx  = 1;        /* border pixel of windows */
 +static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -39,11 +39,11 @@ index d90bd51..cfa993a 100644
 +	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
 +	[SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  }
  };
- 
+
  /* tagging */
 -static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 +static const char *tags[] = { "⌨", "🗺", "3", "4", "🎶" };
- 
+
  static const Rule rules[] = {
  	/* xprop(1):
 @@ -29,7 +29,10 @@ static const Rule rules[] = {
@@ -56,11 +56,11 @@ index d90bd51..cfa993a 100644
 +	{ "Chromium", NULL,       NULL,       1 << 1,       0,           -1 },
 +	{ "Code",     NULL,       NULL,       1 << 2,       0,           -1 },
  };
- 
+
  /* layout(s) */
 @@ -47,7 +50,7 @@ static const Layout layouts[] = {
  };
- 
+
  /* key definitions */
 -#define MODKEY Mod1Mask
 +#define MODKEY Mod4Mask
@@ -68,16 +68,16 @@ index d90bd51..cfa993a 100644
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 @@ -59,7 +62,7 @@ static const Layout layouts[] = {
- 
+
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 -static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 +static const char *dmenucmd[] = { "dmenu_run", NULL };
  static const char *termcmd[]  = { "st", NULL };
- 
+
  /*
 @@ -76,18 +79,18 @@ ResourcePref resources[] = {
- 
+
  static Key keys[] = {
  	/* modifier                     key        function        argument */
 -	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -90,8 +90,8 @@ index d90bd51..cfa993a 100644
 +	// { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 +	// { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 +	{ MODKEY|ShiftMask,             XK_s,      togglebar,      {0} },
-+	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
-+	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_Left,   focusstack,     {.i = +1 } },
++	{ MODKEY,                       XK_Right,  focusstack,     {.i = -1 } },
 +	{ MODKEY,                       XK_Up,     incnmaster,     {.i = +1 } },
 +	{ MODKEY,                       XK_Down,   incnmaster,     {.i = -1 } },
  	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -116,7 +116,7 @@ index d90bd51..cfa993a 100644
 -	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 +	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
  };
- 
+
  /* button definitions */
 diff --git a/dwm/dwm.1 b/dwm/dwm.1
 index b80dfdb..7eb0c53 100644
@@ -193,11 +193,11 @@ index b80dfdb..7eb0c53 100644
  Toggles window's stickiness.
  .TP
 -.B Mod1+j
-+.B Mod4+Right
++.B Mod4+Left
  Focus next window.
  .TP
 -.B Mod1+k
-+.B Mod4+Left
++.B Mod4+Right
  Focus previous window.
  .TP
 -.B Mod1+i
@@ -273,6 +273,6 @@ index b80dfdb..7eb0c53 100644
  Resize focused window while dragging. Tiled windows will be toggled to the floating state.
  .SH CUSTOMIZATION
  dwm is customized by creating a custom config.h and (re)compiling the source
--- 
+--
 2.30.0
 
