@@ -15,24 +15,24 @@ index 4fe6ad6..0a188ca 100644
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
  	/* 8 normal colors */
-+	"#282828", /* black   */
-+	"#cc241d", /* red     */
-+	"#98971a", /* green   */
-+	"#d79921", /* yellow  */
-+	"#458588", /* blue    */
-+	"#b16286", /* magenta */
-+	"#689d6a", /* cyan    */
-+	"#a89984", /* white   */
++	"#0d1926", /* black   */
++	"#ab547f", /* red     */
++	"#80ab54", /* green   */
++	"#ab8054", /* yellow  */
++	"#547fab", /* blue    */
++	"#7f54ab", /* magenta */
++	"#54ab80", /* cyan    */
++	"#cacaca", /* white   */
 +
 +	/* 8 bright colors */
-+	"#928374", /* black   */
-+	"#fb4934", /* red     */
-+	"#b8bb26", /* green   */
-+	"#fabd2f", /* yellow  */
-+	"#83a598", /* blue    */
-+	"#d3869b", /* magenta */
-+	"#8ec07c", /* cyan    */
-+	"#ebdbb2", /* white   */
++	"#808080", /* black   */
++	"#bf7c9d", /* red     */
++	"#9dbf7c", /* green   */
++	"#bf9d7c", /* yellow  */
++	"#7c9dbf", /* blue    */
++	"#9d7cbf", /* magenta */
++	"#7cbf9d", /* cyan    */
++	"#d9e6f2", /* white   */
 +
 +	/* 8 normal colors */
 +	/*
@@ -44,7 +44,7 @@ index 4fe6ad6..0a188ca 100644
  	"cyan3",
  	"gray90",
 +	*/
- 
+
  	/* 8 bright colors */
 +	/*
  	"gray50",
@@ -55,9 +55,9 @@ index 4fe6ad6..0a188ca 100644
  	"cyan",
  	"white",
 +	*/
- 
+
  	[255] = 0,
- 
--- 
+
+--
 2.30.0
 
