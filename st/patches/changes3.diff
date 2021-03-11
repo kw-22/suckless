@@ -16,22 +16,22 @@ index 4fe6ad6..0a188ca 100644
  static const char *colorname[] = {
  	/* 8 normal colors */
 +	"#0d1926", /* black   */
-+	"#ab547f", /* red     */
-+	"#80ab54", /* green   */
-+	"#ab8054", /* yellow  */
-+	"#547fab", /* blue    */
-+	"#7f54ab", /* magenta */
-+	"#54ab80", /* cyan    */
-+	"#cacaca", /* white   */
++	"#c35353", /* red     */
++	"#53c353", /* green   */
++	"#c3c353", /* yellow  */
++	"#5353c3", /* blue    */
++	"#c353c3", /* magenta */
++	"#53c3c3", /* cyan    */
++	"#bababa", /* white   */
 +
 +	/* 8 bright colors */
-+	"#808080", /* black   */
-+	"#bf7c9d", /* red     */
-+	"#9dbf7c", /* green   */
-+	"#bf9d7c", /* yellow  */
-+	"#7c9dbf", /* blue    */
-+	"#9d7cbf", /* magenta */
-+	"#7cbf9d", /* cyan    */
++	"#686868", /* black   */
++	"#d27e7e", /* red     */
++	"#7ed27e", /* green   */
++	"#d2d27e", /* yellow  */
++	"#7e7ed2", /* blue    */
++	"#d27ed2", /* magenta */
++	"#7ed2d2", /* cyan    */
 +	"#d9e6f2", /* white   */
 +
 +	/* 8 normal colors */
