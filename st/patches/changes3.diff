@@ -15,24 +15,24 @@ index 4fe6ad6..0a188ca 100644
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
  	/* 8 normal colors */
-+	"#0d1926", /* black   */
-+	"#c35353", /* red     */
-+	"#53c353", /* green   */
-+	"#c3c353", /* yellow  */
-+	"#5353c3", /* blue    */
-+	"#c353c3", /* magenta */
-+	"#53c3c3", /* cyan    */
-+	"#bababa", /* white   */
++	"#1c1c1c", /* black   */
++	"#e64569", /* red     */
++	"#89d287", /* green   */
++	"#dab752", /* yellow  */
++	"#439ecf", /* blue    */
++	"#d961dc", /* magenta */
++	"#64aaaf", /* cyan    */
++	"#b3b3b3", /* white   */
 +
 +	/* 8 bright colors */
-+	"#686868", /* black   */
-+	"#d27e7e", /* red     */
-+	"#7ed27e", /* green   */
-+	"#d2d27e", /* yellow  */
-+	"#7e7ed2", /* blue    */
-+	"#d27ed2", /* magenta */
-+	"#7ed2d2", /* cyan    */
-+	"#d9e6f2", /* white   */
++	"#727272", /* black   */
++	"#e4859a", /* red     */
++	"#a2cca1", /* green   */
++	"#e1e387", /* yellow  */
++	"#6fbbe2", /* blue    */
++	"#e586e7", /* magenta */
++	"#96dcda", /* cyan    */
++	"#dedede", /* white   */
 +
 +	/* 8 normal colors */
 +	/*
