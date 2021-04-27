@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "CaskaydiaCove Nerd Font Mono:size=11:antialias=true:autohint=false";
+static char *font = "CaskaydiaCove Nerd Font:size=11:antialias=true:autohint=false";
 /* spare fonts */
 static char *font2[] = { "Noto Color Emoji:pixelsize=11:antialias=true:autohint=false" };
 static int borderpx = 2;
@@ -96,7 +96,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-double alpha = 0.6;
+double alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
